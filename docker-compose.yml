@@ -20,6 +20,9 @@ services:
       # The config directory needs to be on the same physical machine
       # you are running ABS on
       - ./config:/config
+    environment:
+      # (Optional) Custom Google Books API Key for metadata fetching
+      - GOOGLE_BOOKS_API_KEY=your_google_books_api_key_here
     restart: unless-stopped
     # You can use the following user directive to run the ABS
     # docker container as a specific user. You will need to change
