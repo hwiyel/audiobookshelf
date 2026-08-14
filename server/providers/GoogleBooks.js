@@ -56,8 +56,11 @@ class GoogleBooks {
       author = encodeURIComponent(author)
       queryString += `+inauthor:${author}`
     }
-    const apiKey = process.env.GOOGLE_BOOKS_API_KEY || process.env.GOOGLE_API_KEY || 'AIzaSyDQuYJq0dfTt-35FxTuWpwkDfVfUZiLiEQ'
-    const url = `https://www.googleapis.com/books/v1/volumes?${queryString}&key=${apiKey}`
+    const apiKey = process.env.GOOGLE_BOOKS_API_KEY || process.env.GOOGLE_API_KEY
+    let url = `https://www.googleapis.com/books/v1/volumes?${queryString}`
+    if (apiKey) {
+      url += `&key=${apiKey}`
+    }
     Logger.debug(`[GoogleBooks] Search url: ${url}`)
     const items = await axios
       .get(url, {
